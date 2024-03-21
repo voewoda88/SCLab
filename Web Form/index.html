@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="/img/lead.png"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Lead Form</title>
+</head>
+<body>
+    <section class="request-form-section">
+      <div class="container">
+        <div class="request-form__inner">
+         
+          <form class="request-form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DIR000001LBH4" method="POST">
+            <input type=hidden name='captcha_settings' value='{"keyname":"SuccessMotorsApiKey","fallback":"true","orgId":"00DIR000001LBH4","ts":""}'>
+            <input type=hidden name="oid" value="00DIR000001LBH4">
+            <input type=hidden name="retURL" value="https://successcraft-7b-dev-ed.develop.lightning.force.com/lightning/o/Lead/pipelineInspection?filterName=00BIR000007ugte2AA">
+            
+            <h2 class="request-form__headline">Enter Your Lead</h2>
+
+            <div class="request-form__inputs">
+              <div class="input-container">
+                <label for="first_name" class="input-label">First Name</label>
+                <input data-custom-type="text" class="input" id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+              </div>
+        
+              <div class="input-container">
+                <label for="last_name" class="input-label">Last Name</label>
+                <input data-custom-type="text" class="input" id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+              </div>
+              
+              <div class="input-container">
+                <label for="email" class="input-label">Email</label>
+                <input data-custom-type="email" class="input" id="email" maxlength="80" name="email" size="20" type="text" />
+              </div>
+              
+              <div class="input-container">
+                <label for="company" class="input-label">Company</label>
+                <input data-custom-type="text" class="input" id="company" maxlength="40" name="company" size="20" type="text" />
+              </div>
+        
+              <div class="input-container">
+                <label for="phone" class="input-label">Phone</label>
+                <input data-custom-type="phone" class="input" id="phone" maxlength="40" name="phone" size="20" type="text" />            
+              </div>
+              
+              <div class="input-container">
+                <div class="product-select">
+                  <!-- <input data-custom-type="list" class="input" id="00NIR000009lGZF" maxlength="255" name="00NIR000009lGZF" size="20" type="text" /> -->
+                  <div class="product-select-trigger">Product</div>
+                  <select class="product-options" data-custom-type="list" id="00NIR000009lGZF" name="00NIR000009lGZF">
+                    <option value="option1">Option 1</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="g-recaptcha" data-sitekey="6LdjP5opAAAAADGcQLZunRxYV1BZVxfIqe6AYtwI"></div>
+
+            <button id="submit-btn">Send</button>
+          </form>
+          
+        </div>
+      </div>
+    </section>
+    
+  <script src="./script.js"></script>
+
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+    function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+    </script>
+</body>
+</html>
+  
