@@ -90,6 +90,21 @@ input.active {
     outline: 1px solid #696969; 
 }
 
+.product-select {
+    width: 350px; 
+    
+    padding: 10px;
+    padding-left: 7px; 
+    margin-top: 15px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        width: 250px;
+    }
+}
+
 #submit-btn {
     padding: 10px 20px; 
     border: none; 
