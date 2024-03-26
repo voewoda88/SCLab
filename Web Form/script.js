@@ -1,10 +1,18 @@
 const validation = (type, value) => {
     switch(type) {
-        case 'email': return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+        case 'email': return /^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com)$/.test(value);
         case 'text': return /^[a-zA-Z ]+$/.test(value);
         case 'phone': return /^(\+375)?\(?(29|33|44)\)?\d{3}-?\d{2}-?\d{2}$/.test(value);
         default: return true;
     }
+}
+
+const validationRecaptcha = () => {
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        return fales;
+    }
+    return true;
 }
 
 const formHandle = () => {
@@ -42,18 +50,18 @@ const formHandle = () => {
 
         console.log(productSelect.value);
         
-        if(!inputs.find(input => input.classList.contains('error')) && productSelect.value) {
+        if(!inputs.find(input => input.classList.contains('error')) && productSelect.value && validationRecaptcha()) {
             form.submit();
         }
     })
 
     phoneInput.addEventListener('input', () => {
-        let phoneNumber = phoneInput.value.replace(/\D/g, ''); // Удалить все нецифровые символы
+        let phoneNumber = phoneInput.value.replace(/\D/g, '');
         let formattedNumber = '+375';
 
         if (phoneNumber.startsWith('375')) {
             formattedNumber = '+375';
-            phoneNumber = phoneNumber.slice(3); // Удалить код страны
+            phoneNumber = phoneNumber.slice(3);
         }
 
         if (phoneNumber.length > 0) {
