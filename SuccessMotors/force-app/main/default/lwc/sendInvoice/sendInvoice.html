@@ -1,0 +1,24 @@
+<template>
+    <lightning-quick-action-panel header="Send Invoice">
+        <div class="slds-m-around_small">
+                <lightning-input type="text" label="Email Subject" value={emailSubject} read-only></lightning-input>
+                <lightning-input-rich-text 
+                    label="Email Body" 
+                    label-visible="true"
+                    value={emailBody}
+                    disabled-categories={disabledCategories}
+                    >
+                </lightning-input-rich-text>
+                <lightning-input type="text" label="Contact Name" value={contactName} read-only></lightning-input>
+                <lightning-input type="email" label="Contact Email" value={contactEmail} read-only></lightning-input>
+            <template lwc:if={error}>
+                <c-error-panel errors={error}></c-error-panel>
+            </template>
+        </div>
+        <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" title="Close Window" onclick={handleCancel}></lightning-button>
+            <lightning-button variant="neutral" label="Preview PDF" title="Preview your INVOICE" class="slds-m-left_x-small" onclick={handlePreview}></lightning-button>  
+            <lightning-button variant="brand" label="Send" title="Send Invoice" class="slds-m-left_x-small" onclick={handleSend}></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>
