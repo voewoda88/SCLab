@@ -1,207 +1,14 @@
 <apex:page standardController="opportunity" extensions="OpportunityInvoicePageController" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false" showHeader="false">
     <html>
         <head>
-            <style>
-                body {
-                    font-family: Georgia, 'Times New Roman', Times, serif;
-                    font-weight: normal;
-                }
-
-                .top-bar {
-                    background-color: rgb(255, 42, 42);
-                    height: 20px;
-                    width: 100%;
-                    position: fixed;
-                    top: 0;
-                }
-
-                .bottom-bar {
-                    background-color: rgb(255, 42, 42);
-                    height: 20px;
-                    width: 100%;
-                    position: fixed;
-                    bottom: 0;
-                    text-align: center;
-                    color: white;
-                }
-
-                .company-container {
-                    position: fixed;
-                    background-color: #eeeeee; 
-                    width: 100%;
-                    margin-top: 10px;
-                    padding-top: 30px;
-                    padding-left: 50px;
-                    padding-bottom: 20px;
-                    
-                }
-
-                .company-info {
-                    float: left;
-                    width: 50%;
-                }
-
-                .company-info-details {
-                    margin-left: 100px;
-                }
-
-                .company-info-details h3 {
-                    margin: 0px;
-                    font-size: 16px;
-                    color:rgb(70, 70, 70);
-                }
-
-                .company-info-address {
-                    margin-top: 2px;
-                    margin-bottom: 0px;
-                    font-size: 12px;
-                    color:rgb(70, 70, 70);
-                }
-
-                .company-info-contact-info {
-                    margin-top: 5px;
-                    font-size: 12px;
-                    color:rgb(70, 70, 70);
-                    /* margin-bottom: 90px; */
-                }
-
-                .company-logo {
-                    float: left;
-                    border: 2px solid #505050;
-                }
-
-                .order-info {
-                    float: right;
-                    width: 50%;
-                    text-align: center;
-                    margin-right: -30px;
-                }
-
-                .order-info h2 {
-                    font-size: 20px;
-                    color:rgb(136, 136, 136);
-                }
-
-                .order-info h5 {
-                    font-size: 12px;
-                    margin-top: 25px;
-                    color: rgb(31, 24, 99);
-                    position: relative;
-                }
-
-                .order-info h5::after {
-                    content: "";
-                    display: block;
-                    width: 100px; 
-                    height: 1px; 
-                    background-color: rgb(77, 34, 134); 
-                    position: absolute;
-                    bottom: -4px;
-                    left: 130px;
-                }
-
-                .contact-info-container {
-                    position: fixed;
-                    margin-left: 50px;
-                    margin-right: 50px;
-                    margin-top: 200px;
-                }
-
-                .contact-info {
-                    float: left;
-                    width: 100%;
-                }
-
-                .contact-info p {
-                    margin-top: 7px;
-                    margin-bottom: 0px;
-                    font-size: 14px;
-                }
-
-                .contact-info h5 {
-                    font-size: 12px;
-                    color: rgb(31, 24, 99);
-                    position: relative;
-                    margin-bottom: 13px;
-                }
-
-                .contact-info h5::after {
-                    content: "";
-                    display: block;
-                    width: 100%; 
-                    height: 1px; 
-                    background-color: rgb(77, 34, 134); 
-                    position: absolute;
-                    bottom: -4px;
-                    left: 0;
-                }
-
-                .product-table-container {
-                    position: fixed;
-                    width: 100%;
-                    margin-top: 370px;
-                }
-
-                .product-table {
-                    width: 87%;
-                    margin: 0 auto;
-                    margin-top: 5px;
-                    margin-bottom: 0px;
-                    border-collapse: collapse;
-                }
-
-                .product-table th {
-                    text-align: center;
-                    color: white;
-                    background-color: rgb(255, 42, 42);
-                    font-size: 14px;
-                    padding-top: 3px;
-                    padding-bottom: 3px;
-                }
-
-                .product-table td {
-                    text-align: center;
-                    border-bottom: 1px solid black;
-                    padding-top: 3px;
-                    padding-bottom: 3px;
-                    font-size: 13px;
-                }
-
-                .balance-table {
-                    width: 87%;
-                    margin: 0 auto;
-                    border-collapse: collapse;
-                    margin-top: 0px;
-                }
-
-                .balance-text {
-                    width: 20%;
-                    text-align: right;
-                    color: rgb(31, 24, 99);
-                    font-size: 15px;
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                }
-
-                .balance-number {
-                    width: 20%;
-                    text-align: center;
-                    background-color: rgb(252, 190, 190);
-                    border-bottom: 1px solid black;
-                    border-top: 1px solid black;
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                    font-size: 17px;
-                }
-
-            </style>
         </head>
         <body>
+            <apex:stylesheet value="{!URLFOR($Resource.style_for_vf)}">
             <div class="top-bar"></div>
 
             <div class="company-container">
                 <div class="company-info">
-                    <img src="" alt="Logo" class="company-logo"></img>
+                    <img src="https://successcraft-7b-dev-ed--c.develop.vf.force.com/resource/1714710910000/vflogo1" alt="Logo" class="company-logo"></img>
                     <div class="company-info-details">
                         <h3>{!account.Name}</h3>
                         <p class="company-info-address">{!account.BillingStreet}, {!account.BillingCity}, {!account.BillingState}, {!account.BillingPostalCode}, {!account.BillingCountry}</p>
@@ -258,7 +65,10 @@
                 </table>
             </div>
 
-            <!-- <div class="bottom-bar">{!account.Name}</div> -->
+            <div class="footer">
+                {!account.Name}
+            </div>
+            </apex:stylesheet>
         </body>
     </html>
 
