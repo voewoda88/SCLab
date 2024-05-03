@@ -1,0 +1,16 @@
+<template>
+    <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}>
+        <lightning-accordion-section label={label}>
+            <!-- <template for:each={opportunities} for:item="opportunity">
+                <lightning-formatted-text value={opportunity.Name} key={opportunity.Id}></lightning-formatted-text>
+            </template> -->
+            <lightning-datatable 
+                    key-field="id" 
+                    data={data} 
+                    columns={columns}
+                    onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </lightning-accordion-section>
+    </lightning-accordion>
+    
+</template>

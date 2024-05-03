@@ -1,0 +1,22 @@
+<template>
+    <template lwc:if={isAppPage}>
+        <div class="slds-card slds-var-p-around_small">
+            <template for:each={accountList} for:item="accountItem">
+                <c-accordion-account-information accountid={accountItem.account.Id} label={accountItem.account.Name} key={accountItem.account.Id}></c-accordion-account-information>
+            </template>
+            <c-paginator
+                page-number={pageNumber}
+                page-size={pageSize}
+                total-item-count={totalItemCount}
+                onprevious={handlePreviousPage}
+                onnext={handleNextPage}>
+            </c-paginator>
+        </div>
+    </template>
+    <template lwc:if={isRecordPage}>
+        <div>
+            <c-accordion-account-information accountid={recordId} label='Extended Information About Opportunities'></c-accordion-account-information>
+        </div>
+        <lightning-formatted-text value={account}></lightning-formatted-text>
+    </template>
+</template>

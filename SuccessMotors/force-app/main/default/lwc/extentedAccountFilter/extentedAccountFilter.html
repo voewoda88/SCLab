@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Filters" icon-name="standard:calibration">
+        <div class="slds-var-m-around_medium">
+            <p style="margin-left: 12px; margin-bottom: -10px;">Search key</p>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item size="12" padding="around-small">
+                    <lightning-input label="Search Key" 
+                                     type="text" 
+                                     value={searchKey} 
+                                     variant="label-hidden"
+                                     onchange={handleSearchKeyChange}>
+                                    </lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-slider 
+                label="Max Opportunity Amount"
+                step="5000"
+                min="0"
+                max="4000000"
+                value={maxAmount}
+                onchange={handleMaxAmountChange}>
+            </lightning-slider>
+        </div>
+    </lightning-card>
+</template>
