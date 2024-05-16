@@ -35,8 +35,8 @@ public without sharing class OpportunityInvoiceModalWindowController {
         List<ContentDocumentLink> notesattch = [SELECT id, ContentDocument.Title, LinkedEntityId 
                                                 FROM ContentDocumentLink 
                                                 WHERE LinkedEntityId =: Id 
-                                                ORDER BY ContentDocument.Title ASC];
-        
+                                                ORDER BY ContentDocument.Title ASC];                                         
+
         Boolean documentLinkflag = False;
 
         for(ContentDocumentLink contentDocumentLink : notesattch) {
@@ -49,7 +49,7 @@ public without sharing class OpportunityInvoiceModalWindowController {
                                    FROM ContentVersion 
                                    WHERE Id =: conVer.Id].ContentDocumentId;
 
-                DELETE contentDocumentLink;
+                DELETE contentDocumentLink; 
 
                 getContentDocumentLink(contentDocId);
             }
