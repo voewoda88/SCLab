@@ -120,4 +120,5 @@ public class PriceBookEntryCreatorTest {
 Для выполнения данного задания было создано модальное окно visualforce, которое является quick action. Модальное окно содержит в себе просмотр pdf-документа, который и является нашим счетом. PDF-документ также является visualforce страницой.
 
 Код модального окна: visualforce ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/pages/opportunityInvoiceModalWindow.page)), apex ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/classes/OpportunityInvoiceModalWindowController.cls))
+
 Код PDF-страницы: visualforce ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/pages/opportunityInvoicePage.page)), apex ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/classes/OpportunityInvoicePageController.cls))
