@@ -59,6 +59,7 @@ public with sharing class SendIvoiceController {
             mail.setSubject(customEmail.emailSubject);
             mail.setHtmlBody(customEmail.emailBody);
             mail.setEntityAttachments(contentVersionIds);
+            mail.setReplyTo('inboundinvoiceemail@24rccilu6bawa9jsjc78rqkl1an6tq0weuxmsvy18dvdtcsn9c.ir-1lbh42ao.ap47.apex.salesforce.com');
 
             Messaging.SendEmailResult[] results = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
 

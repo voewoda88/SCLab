@@ -77,8 +77,6 @@ export default class SendInvoice extends LightningElement {
             this.dispatchEvent(toastEvent);
         }
 
-        setTimeout(2000);
-
         this.dispatchEvent(new CloseActionScreenEvent());
     }
 

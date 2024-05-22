@@ -110,3 +110,15 @@ public class PriceBookEntryCreatorTest {
 ```
 
 Для того, чтобы связать наши созданные объекты с Opportunity использовался инструмент Flow Builder. Был реализован алгоритм для создания объекта Opportunity Product, который выполняется каждый раз при конвертации объекта Lead. Реализацию можно посмотреть [здесь](https://successcraft-7b-dev-ed.develop.lightning.force.com/builder_platform_interaction/flowBuilder.app?flowId=301IR0000009jzpYAA).
+
+## Этап 2
+
+Разработка компонентов lwc, visualforce и написание обработчиков Apex для реализации бизнес-процессов
+
+### Шаг 1. Подготовка счета
+
+Для выполнения данного задания было создано модальное окно visualforce, которое является quick action. Модальное окно содержит в себе просмотр pdf-документа, который и является нашим счетом. PDF-документ также является visualforce страницой.
+
+Код модального окна: visualforce ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/pages/opportunityInvoiceModalWindow.page)), apex ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/classes/OpportunityInvoiceModalWindowController.cls))
+
+Код PDF-страницы: visualforce ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/pages/opportunityInvoicePage.page)), apex ([тык](https://github.com/voewoda88/SCLab/blob/stage2/SuccessMotors/force-app/main/default/classes/OpportunityInvoicePageController.cls))

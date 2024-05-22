@@ -9,5 +9,5 @@ public with sharing class Properties {
     public Integer totalItemCount { get; set; }
 
     @AuraEnabled
-    public Object[] accounts { get; set; }
+    public Object[] accounts {get; set;}
 }
