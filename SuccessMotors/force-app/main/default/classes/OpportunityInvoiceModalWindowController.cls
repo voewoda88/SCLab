@@ -35,7 +35,11 @@ public without sharing class OpportunityInvoiceModalWindowController {
         List<ContentDocumentLink> notesattch = [SELECT id, ContentDocument.Title, LinkedEntityId 
                                                 FROM ContentDocumentLink 
                                                 WHERE LinkedEntityId =: Id 
-                                                ORDER BY ContentDocument.Title ASC];                                         
+                                                ORDER BY ContentDocument.Title ASC];   
+                                                
+        List<ContentDocumentLink> contentDocLinksToDelete = new List<ContentDocumentLink>();
+        List<ContentVersion> contentVersionsToInsert = new List<ContentVersion>();
+        List<ContentDocumentLink> contentDocLinksToInsert = new List<ContentDocumentLink>();                                        
 
         Boolean documentLinkflag = False;
 
@@ -43,26 +47,31 @@ public without sharing class OpportunityInvoiceModalWindowController {
             if(contentDocumentLink.ContentDocument.Title == 'INVOICE') {
                 documentLinkflag = True;
 
-                ContentVersion conVer = getContentVersionDocument(pdfBlob, contentDocumentLink.ContentDocument.Title);
-
-                Id contentDocId = [SELECT ContentDocumentId 
-                                   FROM ContentVersion 
-                                   WHERE Id =: conVer.Id].ContentDocumentId;
-
-                DELETE contentDocumentLink; 
-
-                getContentDocumentLink(contentDocId);
+                contentDocLinksToDelete.add(contentDocumentLink);
+                ContentVersion conVer = createContentVersion(pdfBlob, contentDocumentLink.ContentDocument.Title);
+                contentVersionsToInsert.add(conVer);
             }
         }
 
         if(!documentLinkflag) {
-            ContentVersion conVer = getContentVersionDocument(pdfBlob, 'INVOICE');
-            
-            Id contentDocId = [SELECT ContentDocumentId 
-                               FROM ContentVersion 
-                               WHERE Id =: conVer.Id].ContentDocumentId;
-        
-            getContentDocumentLink(contentDocId);
+            ContentVersion conVer = createContentVersion(pdfBlob, 'INVOICE');
+            contentVersionsToInsert.add(conVer);
+        }
+
+        if(!contentVersionsToInsert.isEmpty()) {
+            insert contentVersionsToInsert;
+            for(ContentVersion conVer : contentVersionsToInsert) {
+                Id contentDocId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id =: conVer.Id].ContentDocumentId;
+                contentDocLinksToInsert.add(createContentDocumentLink(contentDocId));
+            }
+        }
+
+        if(!contentDocLinksToDelete.isEmpty()) {
+            delete contentDocLinksToDelete;
+        }
+    
+        if(!contentDocLinksToInsert.isEmpty()) {
+            insert contentDocLinksToInsert;
         }
 
         PageReference opp = new PageReference('/' + Id);
@@ -70,28 +79,24 @@ public without sharing class OpportunityInvoiceModalWindowController {
         return opp;
     }
 
-    private ContentVersion getContentVersionDocument(Blob pdfBlob, String title) {
+    private ContentVersion createContentVersion(Blob pdfBlob, String title) {
         ContentVersion conVer = new ContentVersion();
         conVer.ContentLocation = 'S';
         conVer.PathOnClient = title + '.pdf';
         conVer.Title = title;
         conVer.VersionData = pdfBlob;
-
+    
         System.debug(conVer);
-
-        INSERT conVer;
-
+    
         return conVer;
     }
-
-    private ContentDocumentLink getContentDocumentLink(Id contentDocumentId) {
+    
+    private ContentDocumentLink createContentDocumentLink(Id contentDocumentId) {
         ContentDocumentLink contentDocLink = new ContentDocumentLink();
         contentDocLink.LinkedEntityId = Id;
         contentDocLink.ContentDocumentId = contentDocumentId;
         contentDocLink.shareType = 'V';
-
-        INSERT contentDocLink;
-
+    
         return contentDocLink;
     }
 }
