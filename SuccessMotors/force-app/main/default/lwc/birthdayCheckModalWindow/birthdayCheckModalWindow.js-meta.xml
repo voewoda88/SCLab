@@ -3,11 +3,14 @@
     <apiVersion>59.0</apiVersion>
     <isExposed>true</isExposed>
     <targets>
-        <target>lightning__RecordAction</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target> 
     </targets>
     <targetConfigs>
-        <targetConfig targets="lightning__RecordAction">
-            <actionType>ScreenAction</actionType>
-        </targetConfig>
+        <targetConfig targets="lightning__AppPage, lightning__RecordPage, lightning__HomePage">
+          <property name="batchClassName" label="Batch Class Name" type="String" default="BirthdayEmailBatch"/>
+          <property name="schedulerClassName" label="Scheduler Class Name" type="String" default="BirthdayEmailScheduler"/>
+      </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
