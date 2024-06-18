@@ -3,7 +3,7 @@ public class BirthdayNotificationControllerTest {
 	@isTest
     static void testSuccessfulSchedule() {
         String cronExp = '0 0 12 * * ?';
-        String schedulerClassName = 'Schedule batch';
+        String schedulerClassName = 'BirthdayEmailScheduler';
         
         Test.startTest();
         Boolean result = BirthdayNotificationController.sheduleBatch(cronExp, schedulerClassName);
@@ -18,7 +18,7 @@ public class BirthdayNotificationControllerTest {
     @isTest
     static void testEmptyCronExpression() {
         String cronExp = '';
-        String schedulerClassName = 'Schedule batch';
+        String schedulerClassName = 'BirthdayEmailScheduler';
         
         Test.startTest();
         Boolean result = BirthdayNotificationController.sheduleBatch(cronExp, schedulerClassName);
@@ -70,7 +70,7 @@ public class BirthdayNotificationControllerTest {
     @isTest
     static void testSuccessfulDeleteJob() {
         String cronExp = '0 0 12 * * ?';
-        String schedulerClassName = 'Schedule batch';
+        String schedulerClassName = 'BirthdayEmailScheduler';
         
         Test.startTest();
         BirthdayNotificationController.sheduleBatch(cronExp, schedulerClassName);
@@ -95,7 +95,7 @@ public class BirthdayNotificationControllerTest {
     @isTest
     static void testRunOnceBatchSuccess() {
         Test.startTest();
-        BirthdayNotificationController.runOnceBatch('Run once');
+        BirthdayNotificationController.runOnceBatch('BirthdayEmailBatch');
         Test.stopTest();
 
         Integer batchJobCount = [SELECT COUNT() FROM AsyncApexJob WHERE JobType='BatchApex' AND Status = 'Processing'];

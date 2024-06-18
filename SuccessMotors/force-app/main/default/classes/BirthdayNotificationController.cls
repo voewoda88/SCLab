@@ -8,10 +8,6 @@ public with sharing class BirthdayNotificationController {
             if (String.isBlank(cronExp)) {
                 throw new IllegalArgumentException('CRON expression cannot be empty');
             }
-
-            if(schedulerClassName.equals('Schedule batch')) {
-                schedulerClassName = 'BirthdayEmailScheduler';
-            }
             
             Type schedulerType = Type.forName(schedulerClassName);
 
@@ -62,10 +58,6 @@ public with sharing class BirthdayNotificationController {
     @AuraEnabled(cacheable=true)
     public static void runOnceBatch(String batchClassName) {
         try {
-            if(batchClassName.equals('Run once')) {
-                batchClassName = 'BirthdayEmailBatch';
-            }
-
             Type batchType = Type.forName(batchClassName);
             if(batchType == null) {
                 throw new IllegalArgumentException('Class not found: ' + batchClassName);
@@ -77,6 +69,16 @@ public with sharing class BirthdayNotificationController {
             }
 
             Database.executeBatch((Database.Batchable<SObject>) batchInstance);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static string getCronExpression(){
+        try {
+            CronTrigger tmp = [SELECT Id, CronJobDetail.Name, CronExpression FROM CronTrigger WHERE CronJobDetail.Name =: sheduleJobName];
+            return tmp.CronExpression;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
